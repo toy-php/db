@@ -1,0 +1,16 @@
+{
+  "name": "toy-php/db",
+  "description": "Библиотека по работе с базой данных",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "Seytumerov Mustafa",
+      "email": "seymus007@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "": ["src/"]
+    }
+  }
+}

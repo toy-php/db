@@ -46,4 +46,10 @@ interface Collection extends \ArrayAccess, \IteratorAggregate, \Countable
      * @return mixed
      */
     public function search($property, $value);
+
+    /**
+     * Преобразовать коллекцию в массив
+     * @return array
+     */
+    public function toArray();
 }

@@ -3,6 +3,7 @@
 namespace DB;
 
 use DB\Interfaces\Collection as CollectionInterface;
+use DB\Interfaces\Entity as EntityInterface;
 
 class Collection extends Container implements CollectionInterface
 {
@@ -98,5 +99,19 @@ class Collection extends Container implements CollectionInterface
     public function count()
     {
         return $this->objects->count();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toArray()
+    {
+        $result = $this->objects->getArrayCopy();
+        foreach ($result as $key => $object) {
+            if($object instanceof EntityInterface){
+                $result[$key] = $object->toArray();
+            }
+        }
+        return $result;
     }
 }

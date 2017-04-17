@@ -155,14 +155,14 @@ class Mapper implements MapperInterface
         $id = $entity->getId();
         $data = $this->filterData($entity->toArray());
         if (empty($id)) {
-            $result = $this->adapter->transaction(function (Adapter $adapter) use($data){
-                return $adapter->insert($this->table, $data);
+            $lastId = $this->adapter->transaction(function (Adapter $adapter) use($data){
+                $adapter->insert($this->table, $data);
+                return $this->adapter->lastInsertId($this->getPrimaryKey());
             });
-            if (!$result) {
+            if (!$lastId) {
                 throw new Exception('Возникла ошибка при сохранении');
             }
-            $id = $this->adapter->lastInsertId($this->getPrimaryKey());
-            return $entity->withId($id);
+            return $entity->withId($lastId);
         }
         $result = $this->adapter->transaction(function (Adapter $adapter) use($data, $id){
             return $adapter->update($this->table, $data, [$this->getPrimaryKey() => $id]);

@@ -83,6 +83,16 @@ class Table extends Container implements TableInterface
     }
 
     /**
+     * Получить последний элемент
+     * @return Entity|null
+     */
+    public function getLast()
+    {
+        $objects = $this->objects->getArrayCopy();
+        return end($objects);
+    }
+
+    /**
      * Поиск сущности согласно критериям
      * @param array $criteria
      * @return Interfaces\Entity|null
@@ -152,7 +162,7 @@ class Table extends Container implements TableInterface
     public function offsetSet($offset, $entity)
     {
         $entity = $this->mapper->save($entity);
-        parent::offsetSet($offset, $entity);
+        parent::offsetSet($entity->getId(), $entity);
     }
 
     /**

@@ -42,7 +42,12 @@ class Entity implements EntityInterface
      */
     public function withId($id)
     {
-        return $this->__call($this->primaryKey, $id);
+        if($this->__get($this->primaryKey) == $id){
+            return $this;
+        }
+        $instance = clone $this;
+        $instance->data->offsetSet($this->primaryKey, $id);
+        return $instance;
     }
 
     /**

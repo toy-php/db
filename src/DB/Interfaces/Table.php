@@ -26,5 +26,9 @@ interface Table extends \ArrayAccess
      */
     public function count(array $criteria = []);
 
-
+    /**
+     * Получить последний элемент
+     * @return Entity|null
+     */
+    public function getLast();
 }

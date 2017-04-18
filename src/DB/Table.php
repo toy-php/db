@@ -72,6 +72,15 @@ class Table extends Container implements TableInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function withPrimaryKey($primaryKey)
+    {
+        $mapper = $this->mapper->withPrimaryKey($primaryKey);
+        return $this->withMapper($mapper);
+    }
+
+    /**
      * Получить преобразователь с внешним классом сущности
      * @param $entityClass
      * @return $this|Table

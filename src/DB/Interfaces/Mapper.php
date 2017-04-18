@@ -13,6 +13,13 @@ interface Mapper
     public function withEntityClass($entityClass);
 
     /**
+     * Получить преобразователь с отличным именем первичного ключа
+     * @param $primaryKey
+     * @return $this|Mapper
+     */
+    public function withPrimaryKey($primaryKey);
+
+    /**
      * Получить класс сущности
      * @return string
      */

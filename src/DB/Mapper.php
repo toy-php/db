@@ -38,6 +38,19 @@ class Mapper implements MapperInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function withPrimaryKey($primaryKey)
+    {
+        if($this->primaryKey === $primaryKey){
+            return $this;
+        }
+        $instance = clone $this;
+        $instance->primaryKey = $primaryKey;
+        return $instance;
+    }
+
+    /**
      * Получить класс сущности
      * @return string
      */

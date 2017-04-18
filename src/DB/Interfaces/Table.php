@@ -6,6 +6,27 @@ interface Table extends \ArrayAccess
 {
 
     /**
+     * Получить экземпляр с внешним преобразователем
+     * @param Mapper $mapper
+     * @return $this|Table
+     */
+    public function withMapper(Mapper $mapper);
+
+    /**
+     * Добавить функцию отношений таблиц
+     * @param callable $relation
+     * @return $this|Table
+     */
+    public function withRelation($relation);
+
+    /**
+     * Получить экземпляр с отличным именем первичного ключа
+     * @param $primaryKey
+     * @return $this|Table
+     */
+    public function withPrimaryKey($primaryKey);
+
+    /**
      * Поиск сущности согласно критериям
      * @param array $criteria
      * @return Entity|null

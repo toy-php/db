@@ -15,8 +15,8 @@ class Table extends Container implements TableInterface
 
     public function __construct(Mapper $mapper)
     {
-        parent::__construct($mapper->getEntityClass());
         $this->mapper = $mapper;
+        parent::__construct($this->mapper->getEntityClass());
         $this->relations = new Relations(function($entity){
             return $entity;
         });
@@ -29,7 +29,7 @@ class Table extends Container implements TableInterface
      */
     protected function createCollection(array $objects)
     {
-        return new Collection($this->mapper->getEntityClass(), $objects);
+        return new Collection($this->type, $objects);
     }
 
     /**

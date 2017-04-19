@@ -27,6 +27,13 @@ interface Table extends \ArrayAccess
     public function withPrimaryKey($primaryKey);
 
     /**
+     * Получить экземпляр таблицы с внешним классом сущности
+     * @param $entityClass
+     * @return $this|Table
+     */
+    public function withEntityClass($entityClass);
+
+    /**
      * Поиск сущности согласно критериям
      * @param array $criteria
      * @return Entity|null

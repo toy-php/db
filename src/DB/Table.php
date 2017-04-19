@@ -81,9 +81,7 @@ class Table extends Container implements TableInterface
     }
 
     /**
-     * Получить преобразователь с внешним классом сущности
-     * @param $entityClass
-     * @return $this|Table
+     * @inheritdoc
      */
     public function withEntityClass($entityClass)
     {

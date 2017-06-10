@@ -2,7 +2,9 @@
 
 namespace DB;
 
-class DataBase implements \ArrayAccess
+use DB\Interfaces\DataBase as DataBaseInterface;
+
+class DataBase implements DataBaseInterface
 {
 
     protected $adapter;

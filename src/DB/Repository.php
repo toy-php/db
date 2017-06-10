@@ -6,6 +6,7 @@ use DB\Interfaces\Table as TableInterface;
 use DB\Interfaces\DataBase as DataBaseInterface;
 use DB\Interfaces\Repository as RepositoryInterface;
 use DB\Interfaces\Model as ModelInterface;
+use DB\Interfaces\Entity as EntityInterface;
 
 abstract class Repository extends Collection implements RepositoryInterface
 {
@@ -30,13 +31,28 @@ abstract class Repository extends Collection implements RepositoryInterface
     abstract protected function buildTable(DataBaseInterface $dataBase);
 
     /**
+     * @param EntityInterface $entity
+     * @return ModelInterface
+     */
+    abstract protected function buildModel(EntityInterface $entity);
+
+    /**
      * Получить модель по идентификатору
      * @param $id
-     * @return Model
+     * @return ModelInterface|null
      */
     public function getById($id)
     {
-        return isset($this[$id]) ? $this[$id] : $this[$id] = $this->table[$id];
+        if (!isset($this[$id])) {
+            $entity = $this->table[$id];
+            if (empty($entity)) {
+                return null;
+            }
+            $model = $this->buildModel($entity);
+            $this->checkType($model);
+            return $this[$id] = $model;
+        }
+        return $this[$id];
     }
 
     /**

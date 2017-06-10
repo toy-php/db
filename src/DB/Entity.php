@@ -63,6 +63,16 @@ class Entity implements EntityInterface
     }
 
     /**
+     * Магия наличия поля
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return $this->data->offsetExists($name);
+    }
+
+    /**
      * Магия получения экземпляра сущности с новым значением поля
      * @param $name
      * @param $arguments

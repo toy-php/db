@@ -24,4 +24,23 @@ class Model implements ModelInterface
         return $this->entity;
     }
 
+    /**
+     * Магия получения значений сущности
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->entity->$name;
+    }
+
+    /**
+     * Магия наличия значений сущности
+     * @param $name
+     * @return boolean
+     */
+    public function __isset($name)
+    {
+        return isset($this->entity->$name);
+    }
 }

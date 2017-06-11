@@ -43,4 +43,13 @@ class Model implements ModelInterface
     {
         return isset($this->entity->$name);
     }
+
+    /**
+     * Получить данные в виде массива
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->entity->toArray();
+    }
 }

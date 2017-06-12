@@ -79,7 +79,7 @@ class Collection extends Container implements CollectionInterface
     public function search($property, $value)
     {
         $offset = array_search($value, array_column($this->objects->getArrayCopy(), $property));
-        if($offset >= 0){
+        if($offset !== false and $offset >= 0){
             return $this->offsetGet($offset);
         }
         return null;

@@ -43,16 +43,17 @@ abstract class Repository extends Collection implements RepositoryInterface
      */
     public function getById($id)
     {
-        if (!isset($this[$id])) {
-            $entity = $this->table[$id];
-            if (empty($entity)) {
-                return null;
-            }
-            $model = $this->buildModel($entity);
-            $this->checkType($model);
-            return $this[$id] = $model;
+        $model = $this[$id];
+        if (!empty($model)) {
+            return $model;
         }
-        return $this[$id];
+        $entity = $this->table[$id];
+        if (empty($entity)) {
+            return null;
+        }
+        $model = $this->buildModel($entity);
+        $this->checkType($model);
+        return $this[$id] = $model;
     }
 
     /**

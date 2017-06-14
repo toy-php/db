@@ -34,7 +34,10 @@ abstract class Repository extends Collection implements RepositoryInterface
      * @param EntityInterface $entity
      * @return ModelInterface
      */
-    abstract protected function buildModel(EntityInterface $entity);
+    protected function buildModel(EntityInterface $entity)
+    {
+        return new Model($entity);
+    }
 
     /**
      * Получить модель по идентификатору

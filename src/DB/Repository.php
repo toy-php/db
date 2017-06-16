@@ -17,10 +17,10 @@ abstract class Repository extends Collection implements RepositoryInterface
      */
     protected $table;
 
-    public function __construct(DataBaseInterface $dataBase, $modelType)
+    public function __construct(DataBaseInterface $dataBase, $modelType = null)
     {
         $this->table = $this->buildTable($dataBase);
-        parent::__construct($modelType);
+        parent::__construct($modelType ?: ModelInterface::class);
     }
 
     /**

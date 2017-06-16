@@ -4,6 +4,7 @@ namespace DB;
 
 use DB\Interfaces\Collection as CollectionInterface;
 use DB\Interfaces\Entity as EntityInterface;
+use DB\Interfaces\Model as ModelInterface;
 
 class Collection extends Container implements CollectionInterface
 {
@@ -108,7 +109,8 @@ class Collection extends Container implements CollectionInterface
     {
         $result = $this->objects->getArrayCopy();
         foreach ($result as $key => $object) {
-            if($object instanceof EntityInterface){
+            if($object instanceof EntityInterface
+               or $object instanceof ModelInterface){
                 $result[$key] = $object->toArray();
             }
         }

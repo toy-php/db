@@ -57,9 +57,13 @@ class Entity implements EntityInterface
      */
     public function __get($name)
     {
-        return $this->data->offsetExists($name)
+        $value = $this->data->offsetExists($name)
             ? $this->data->offsetGet($name)
             : null;
+        if(is_callable($value)){
+            return $this->data[$name] = $value();
+        }
+        return $value;
     }
 
     /**

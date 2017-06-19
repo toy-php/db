@@ -44,7 +44,7 @@ abstract class Repository extends Collection implements RepositoryInterface
      * @param $id
      * @return ModelInterface|null
      */
-    public function getById($id)
+    public function findById($id)
     {
         $model = $this[$id];
         if (!empty($model)) {
@@ -81,7 +81,7 @@ abstract class Repository extends Collection implements RepositoryInterface
      * @param array $criteria
      * @return \DB\Interfaces\Collection
      */
-    public function getAll(array $criteria)
+    public function findAll(array $criteria)
     {
         $collection = $this->table->findAll($criteria);
         $modelsCollection = new Collection($this->type);

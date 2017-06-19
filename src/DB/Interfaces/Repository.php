@@ -10,7 +10,21 @@ interface Repository
      * @param $id
      * @return Model
      */
-    public function getById($id);
+    public function findById($id);
+
+    /**
+     * Получить модель согласно критериям
+     * @param array $criteria
+     * @return Model
+     */
+    public function find(array $criteria);
+
+    /**
+     * Получить коллекцию моделей
+     * @param array $criteria
+     * @return \DB\Interfaces\Collection
+     */
+    public function findAll(array $criteria);
 
     /**
      * Сохранить модель

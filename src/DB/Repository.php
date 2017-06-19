@@ -60,6 +60,45 @@ abstract class Repository extends Collection implements RepositoryInterface
     }
 
     /**
+     * Получить модель согласно критериям
+     * @param array $criteria
+     * @return Model
+     */
+    public function find(array $criteria)
+    {
+        $entity = $this->table->find($criteria);
+        $model = $this[$entity->getId()];
+        if (empty($model)) {
+            $model = $this->buildModel($entity);
+            $this->checkType($model);
+            $this[$entity->getId()] = $model;
+        }
+        return $model;
+    }
+
+    /**
+     * Получить коллекцию моделей
+     * @param array $criteria
+     * @return \DB\Interfaces\Collection
+     */
+    public function getAll(array $criteria)
+    {
+        $collection = $this->table->findAll($criteria);
+        $modelsCollection = new Collection($this->type);
+        /** @var Entity $entity */
+        foreach ($collection as $entity) {
+            $model = $this[$entity->getId()];
+            if (empty($model)) {
+                $model = $this->buildModel($entity);
+                $this->checkType($model);
+                $this[$entity->getId()] = $model;
+            }
+            $modelsCollection[] = $model;
+        }
+        return $modelsCollection;
+    }
+
+    /**
      * Сохранить модель
      * @param ModelInterface $model
      * @return void В случае ошибки сохранения будет сгенерировано исключение
